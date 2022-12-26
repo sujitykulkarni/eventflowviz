@@ -19,7 +19,7 @@
  * @property {number} radius - Radius of the dot
  */
 
-import * as d3 from "d3";
+import * as d3 from 'd3';
 
 /**
  * @type D3EventFlowData
@@ -34,7 +34,7 @@ export type D3EventFlowData = {
 /**
  * @type ChartMargin
  */
-export type ChartMargin = Record<"top" | "right" | "bottom" | "left", number>;
+export type ChartMargin = Record<'top' | 'right' | 'bottom' | 'left', number>;
 
 /**
  * @type Dot
@@ -61,17 +61,17 @@ interface D3EventFlowVizProps {
 }
 
 // Chart constants
-const WIDTH = 500,
-  HEIGHT = 500,
-  TOP = 10,
-  RIGHT = 10,
-  LEFT = 10,
-  BOTTOM = 10,
-  DOT_RADIUS = 15,
-  DOT_COLOR = "#93c5fd",
-  AXIS_COLOR = "#64748b",
-  LABEL_COLOR = "#1e293b",
-  BASE_FONT_SIZE = 10;
+const WIDTH = 500;
+const HEIGHT = 500;
+const TOP = 10;
+const RIGHT = 10;
+const LEFT = 10;
+const BOTTOM = 10;
+const DOT_RADIUS = 15;
+const DOT_COLOR = '#93c5fd';
+const AXIS_COLOR = '#64748b';
+const LABEL_COLOR = '#1e293b';
+const BASE_FONT_SIZE = 10;
 
 const initProps: D3EventFlowVizProps = {
   width: WIDTH,
@@ -81,7 +81,7 @@ const initProps: D3EventFlowVizProps = {
     radius: DOT_RADIUS,
   },
   data: [],
-  id: "",
+  id: '',
 };
 
 /**
@@ -119,11 +119,8 @@ export default class D3EventFlowViz {
       data,
       id,
     };
-    this.svg = d3
-      .select(`#${id}.d3-event-flow .svg`)
-      .attr("width", this.props.width)
-      .attr("height", this.props.height);
-    this.svg.selectAll("*").remove();
+    this.svg = d3.select(`#${id}.d3-event-flow .svg`).attr('width', this.props.width).attr('height', this.props.height);
+    this.svg.selectAll('*').remove();
   }
 
   /**
@@ -141,10 +138,7 @@ export default class D3EventFlowViz {
     const minSize = Math.min(...sizes);
     const cy = 0 - dot.radius;
 
-    const colorScale = d3
-      .scaleSequential()
-      .domain([minSize, maxSize])
-      .interpolator(d3.interpolateWarm);
+    const colorScale = d3.scaleSequential().domain([minSize, maxSize]).interpolator(d3.interpolateWarm);
 
     const timeScale = d3
       .scaleTime()
@@ -152,50 +146,42 @@ export default class D3EventFlowViz {
       .range([0, width - 50])
       .nice();
 
-    const linearScale = d3
-      .scaleLinear()
-      .domain([minSize, maxSize])
-      .range([5, DOT_RADIUS]);
+    const linearScale = d3.scaleLinear().domain([minSize, maxSize]).range([5, DOT_RADIUS]);
 
-    const xAxis = d3
-      .axisBottom(timeScale)
-      .tickArguments([d3.timeWeek.every(2)]);
+    const xAxis = d3.axisBottom(timeScale).tickArguments([d3.timeWeek.every(2)]);
 
     const shapeGroup = this.svg
-      .append("g")
-      .style(
-        "transform",
-        `translate(${margin.left}px,${height - margin.top - margin.bottom}px)`
-      )
-      .style("font-size", `${BASE_FONT_SIZE}px`);
+      .append('g')
+      .style('transform', `translate(${margin.left}px,${height - margin.top - margin.bottom}px)`)
+      .style('font-size', `${BASE_FONT_SIZE}px`);
 
     shapeGroup
-      .selectAll("circle")
+      .selectAll('circle')
       .data<D3EventFlowData>(data)
       .enter()
-      .append("circle")
-      .attr("cx", (d) => timeScale(d.time))
-      .attr("cy", cy)
-      .attr("r", (d) => linearScale(d.size))
-      .attr("fill", (d) => colorScale(d.size || 0))
-      .attr("stroke", "white")
-      .attr("style", `transform:translateY(-${dot.radius / 2}px)`)
+      .append('circle')
+      .attr('cx', (d) => timeScale(d.time))
+      .attr('cy', cy)
+      .attr('r', (d) => linearScale(d.size))
+      .attr('fill', (d) => colorScale(d.size || 0))
+      .attr('stroke', 'white')
+      .attr('style', `transform:translateY(-${dot.radius / 2}px)`)
       .exit()
       .remove();
     shapeGroup
-      .selectAll("text")
+      .selectAll('text')
       .data<D3EventFlowData>(data)
       .enter()
-      .append("text")
+      .append('text')
       .text((d, i) => d.label || i)
-      .attr("x", (d) => timeScale(d.time))
-      .attr("y", (d) => 0 - linearScale(d.size || 0) * 2 - BASE_FONT_SIZE - 10)
-      .attr("text-anchor", "middle")
-      .attr("font-size", `${BASE_FONT_SIZE}px`)
-      .attr("fill", LABEL_COLOR)
+      .attr('x', (d) => timeScale(d.time))
+      .attr('y', (d) => 0 - linearScale(d.size || 0) * 2 - BASE_FONT_SIZE - 10)
+      .attr('text-anchor', 'middle')
+      .attr('font-size', `${BASE_FONT_SIZE}px`)
+      .attr('fill', LABEL_COLOR)
       .exit()
       .remove();
-    shapeGroup.call(xAxis).attr("color", AXIS_COLOR);
+    shapeGroup.call(xAxis).attr('color', AXIS_COLOR);
   };
 
   /**
