@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/sujitykulkarni/eventflowviz/issues"
   },
-  "homepage": "https://github.com/sujitykulkarni/eventflowviz#readme"
+  "homepage": "https://github.com/sujitykulkarni/eventflowviz#readme",
+  "devDependencies": {
+    "typescript": "^4.9.4"
+  }
 }
