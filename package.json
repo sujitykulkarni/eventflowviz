@@ -2,7 +2,7 @@
   "name": "eventflowviz",
   "version": "1.0.0",
   "description": "Event flow visualization based on D3.js time scale",
-  "main": "index.js",
+  "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "test": "jest --config jestconfig.json",
