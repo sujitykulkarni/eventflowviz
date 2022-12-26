@@ -1,6 +1,6 @@
 {
   "name": "eventflowviz",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Event flow visualization based on D3.js time scale",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
