@@ -1,19 +1,29 @@
 {
   "name": "eventflowviz",
   "version": "1.0.0",
-  "description": "",
+  "description": "Event flow visualization based on D3.js time scale",
   "main": "index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "test": "jest --config jestconfig.json",
     "build": "npm run lint && tsc",
     "format": "prettier --write \"src/**/*.ts\"",
-    "lint": "tslint -p tsconfig.json"
+    "lint": "tslint -p tsconfig.json",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sujitykulkarni/eventflowviz.git"
   },
-  "keywords": [],
+  "keywords": [
+    "D3",
+    "event flow",
+    "event chart"
+  ],
   "author": "Sujit Kulkarni <sujitykulkarni@gmail.com>",
   "license": "MIT",
   "bugs": {
