@@ -14,8 +14,8 @@
     "url": "git+https://github.com/sujitykulkarni/eventflowviz.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Sujit Kulkarni <sujitykulkarni@gmail.com>",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/sujitykulkarni/eventflowviz/issues"
   },
